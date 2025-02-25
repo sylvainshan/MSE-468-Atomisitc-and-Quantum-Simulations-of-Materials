@@ -1,0 +1,62 @@
+# LAMMPS input script for a molecular dynamics simulation of Ni using an EAM potential
+
+# Variables
+variable supercell equal 5
+variable timestep equal 0.001
+variable stride equal 1000
+
+# Initialize simulation
+clear
+units metal
+dimension 3
+boundary p p p
+atom_style atomic
+atom_modify map hash
+
+# Create atom definition
+lattice custom 3.5400 &
+	a1 1 0 0 & 
+	a2 0 1 0 &
+	a3 0 0 1 &
+	basis 0.0000 0.0000 0.0000 &
+	basis 0.0000 0.5000 0.5000 &
+	basis 0.5000 0.0000 0.5000 &
+	basis 0.5000 0.5000 0.0000 
+
+region myreg block 0 ${supercell} 0 ${supercell} 0 ${supercell}
+create_box 1 myreg
+create_atoms 1 box
+mass 1 58.6934
+
+# Set interaction potential
+pair_style eam
+pair_coeff * * Ni_u3.eam
+
+# Define simulation parameters
+timestep ${timestep}
+# Following would be return in the output file
+thermo ${stride}
+thermo_style custom time temp pe ke press
+
+# Dumping positions (scaled) and velocities
+
+dump dp1 all atom ${stride} positions.lammpstrj
+dump dp2 all custom ${stride} velocities.lammpstrj id type vx vy vz
+dump_modify dp2 format line "%d %d %g %g %g" 
+
+# Set initial temperature and velocity
+velocity all create 1000.0 87287 loop geom
+
+# Run equilibration
+# last quantity is T damp which should be about 100 times timestep but using variables
+# like $(100.0*${timestep}) or $(100.0*timestep) doesn't work, so for now it is hardcoded
+fix 1 all nvt temp 1000.0 1000.0 0.1
+run 5000
+
+# Run production simulation
+unfix 1
+fix 2 all nvt temp 1000.0 1000.0 0.1 
+run 30000
+
+# Dumping recovery file
+write_data recovery.data
