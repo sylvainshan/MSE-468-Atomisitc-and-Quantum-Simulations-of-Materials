@@ -1,0 +1,96 @@
+LAMMPS (7 Feb 2024 - Development - patch_7Feb2024_update1-35-g81609d04e3)
+# This section defines the units that you are using. The dimensions of your
+# simulation and the periodic boundary conditions.
+
+units metal
+dimension 3
+boundary p p p
+
+# Define the initial lattice structure and size [angstrom].
+atom_style atomic
+variable lattice_constant equal 4.24
+lattice fcc ${lattice_constant}
+lattice fcc 4.24
+Lattice spacing in x,y,z = 4.24 4.24 4.24
+region box block 0 1 0 1 0 1 # Define box with 1 unit cell per side
+
+# Create the simulation box and populate it with atoms .
+create_box 1 box
+Created orthogonal box = (0 0 0) to (4.24 4.24 4.24)
+  1 by 1 by 1 MPI processor grid
+create_atoms 1 box
+Created 4 atoms
+  using lattice units in orthogonal box = (0 0 0) to (4.24 4.24 4.24)
+  create_atoms CPU = 0.001 seconds
+
+# Define atomic mass [g/mol] for the element being simulated .
+mass 1 107.8681
+
+# Define interatomic potential using Lennard - Jones potential .
+pair_style lj/cut 10.0
+pair_coeff 1 1 0.341 2.648 # LJ parameters for Ag (ϵ in eV , σ in Å )
+
+# Define neighbor list settings to improve computational efficiency .
+neighbor 0.3 bin
+neigh_modify delay 5 every 1
+
+# Allow isotropic box relaxation and atomic position relaxation .
+fix 1 all box/relax iso 0.0 vmax 0.001
+
+# Monitor thermodynamic properties with energy output at every step .
+thermo 1
+thermo_style custom step temp pe lx ly lz press
+
+# Minimize energy to optimize geometry . Cut - offs and steps from energy and forces .
+# minimize 1.0e-6 1.0e-8 1000 10000
+run 0
+WARNING: No fixes with time integration, atoms won't move (../verlet.cpp:60)
+Generated 0 of 0 mixed pair_coeff terms from geometric mixing rule
+Neighbor list info ...
+  update: every = 1 steps, delay = 5 steps, check = yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 10.3
+  ghost atom cutoff = 10.3
+  binsize = 5.15, bins = 1 1 1
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair lj/cut, perpetual
+      attributes: half, newton on
+      pair build: half/bin/atomonly/newton
+      stencil: half/bin/3d
+      bin: standard
+Per MPI rank memory allocation (min/avg/max) = 2.991 | 2.991 | 2.991 Mbytes
+   Step          Temp          PotEng           Lx             Ly             Lz           Press     
+         0   0             -11.058376      4.24           4.24           4.24          -151385.86    
+Loop time of 1.878e-06 on 1 procs for 0 steps with 4 atoms
+
+0.0% CPU use with 1 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.878e-06  |            |       |100.00
+
+Nlocal:              4 ave           4 max           4 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:            662 ave         662 max         662 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:            448 ave         448 max         448 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 448
+Ave neighs/atom = 112
+Neighbor list builds = 0
+Dangerous builds = 0
+
+# Save the final structure and trajectory .
+# write_data optimized_structure.data
+
+variable pot_e equal pe
+print "${lattice_constant} ${pot_e}" append energy_volume.dat
+4.24 -11.0583763756261
+Total wall time: 0:00:00
