@@ -1,3 +1,9 @@
+#!/bin/bash
+
+# Loop over lattice constants from 3.95 to 4.05 with step size 0.1
+for lattice_constant in $(seq 3.95 0.1 4.05); do
+    # Generate a temporary LAMMPS input file with the current lattice constant
+    cat > lammps_input_temp.in <<EOF
 # This section defines the units that you are using. The dimensions of your
 # simulation and the periodic boundary conditions.
 
@@ -7,8 +13,8 @@ boundary p p p
 
 # Define the initial lattice structure and size [angstrom].
 atom_style atomic
-variable lattice_constant equal 4.085
-lattice fcc ${lattice_constant} 
+variable lattice_constant equal ${lattice_constant}
+lattice fcc \${lattice_constant}
 region box block 0 1 0 1 0 1 # Define box with 1 unit cell per side
 
 # Create the simulation box and populate it with atoms .
@@ -18,9 +24,9 @@ create_atoms 1 box
 # Define atomic mass [g/mol] for the element being simulated .
 mass 1 107.8681
 
-# Define interatomic potential using Lennard - Jones potential .
-pair_style lj/cut 20.0
-pair_coeff 1 1 0.341 2.648 # LJ parameters for Ag (ϵ in eV , σ in Å )
+# Define the Embedded Atom Potential
+pair_style eam
+pair_coeff * * Ag_u3.eam
 
 # Define neighbor list settings to improve computational efficiency .
 neighbor 0.3 bin
@@ -33,11 +39,18 @@ fix 1 all box/relax iso 0.0 vmax 0.001
 thermo 1
 thermo_style custom step temp pe lx ly lz press
 
-# Minimize energy to optimize geometry . Cut - offs and steps from energy and forces .
-# minimize 1.0e-6 1.0e-8 1000 10000
 run 0
-variable pot_e equal pe
 
 # Save the final structure and trajectory .
-# write_data optimized_structure.data
-print "${lattice_constant} ${pot_e}" append energy_volume.dat
+write_data optimized_structure_${lattice_constant}.data
+
+variable pot_e equal pe
+print "\${lattice_constant} \${pot_e}" append energy_volume.dat
+EOF
+
+    # Run LAMMPS with the generated input file
+    lmp -in lammps_input_temp.in
+
+    # Clean up the temporary input file
+    rm lammps_input_temp.in
+done

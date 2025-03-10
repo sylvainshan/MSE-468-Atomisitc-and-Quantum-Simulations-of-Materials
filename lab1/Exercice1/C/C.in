@@ -7,8 +7,7 @@ boundary p p p
 
 # Define the initial lattice structure and size [angstrom].
 atom_style atomic
-variable lattice_constant equal 4.085
-lattice fcc ${lattice_constant} 
+lattice fcc 6 # Initial lattice constant
 region box block 0 1 0 1 0 1 # Define box with 1 unit cell per side
 
 # Create the simulation box and populate it with atoms .
@@ -19,7 +18,7 @@ create_atoms 1 box
 mass 1 107.8681
 
 # Define interatomic potential using Lennard - Jones potential .
-pair_style lj/cut 20.0
+pair_style lj/cut 10.0
 pair_coeff 1 1 0.341 2.648 # LJ parameters for Ag (ϵ in eV , σ in Å )
 
 # Define neighbor list settings to improve computational efficiency .
@@ -34,10 +33,7 @@ thermo 1
 thermo_style custom step temp pe lx ly lz press
 
 # Minimize energy to optimize geometry . Cut - offs and steps from energy and forces .
-# minimize 1.0e-6 1.0e-8 1000 10000
-run 0
-variable pot_e equal pe
+minimize 1.0e-6 1.0e-8 1000 10000
 
 # Save the final structure and trajectory .
-# write_data optimized_structure.data
-print "${lattice_constant} ${pot_e}" append energy_volume.dat
+write_data optimized_structure.data

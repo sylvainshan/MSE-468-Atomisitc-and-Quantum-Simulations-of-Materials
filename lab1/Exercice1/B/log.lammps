@@ -8,27 +8,28 @@ boundary p p p
 
 # Define the initial lattice structure and size [angstrom].
 atom_style atomic
-variable lattice_constant equal 4.085
+variable lattice_constant equal 4.095
 lattice fcc ${lattice_constant}
-lattice fcc 4.085
-Lattice spacing in x,y,z = 4.085 4.085 4.085
+lattice fcc 4.095
+Lattice spacing in x,y,z = 4.095 4.095 4.095
 region box block 0 1 0 1 0 1 # Define box with 1 unit cell per side
 
 # Create the simulation box and populate it with atoms .
 create_box 1 box
-Created orthogonal box = (0 0 0) to (4.085 4.085 4.085)
+Created orthogonal box = (0 0 0) to (4.095 4.095 4.095)
   1 by 1 by 1 MPI processor grid
 create_atoms 1 box
 Created 4 atoms
-  using lattice units in orthogonal box = (0 0 0) to (4.085 4.085 4.085)
+  using lattice units in orthogonal box = (0 0 0) to (4.095 4.095 4.095)
   create_atoms CPU = 0.000 seconds
 
 # Define atomic mass [g/mol] for the element being simulated .
 mass 1 107.8681
 
-# Define interatomic potential using Lennard - Jones potential .
-pair_style lj/cut 20.0
-pair_coeff 1 1 0.341 2.648 # LJ parameters for Ag (ϵ in eV , σ in Å )
+# Define the Embedded Atom Potential
+pair_style eam
+pair_coeff * * Ag_u3.eam
+Reading eam potential file Ag_u3.eam with DATE: 2007-06-11
 
 # Define neighbor list settings to improve computational efficiency .
 neighbor 0.3 bin
@@ -41,29 +42,26 @@ fix 1 all box/relax iso 0.0 vmax 0.001
 thermo 1
 thermo_style custom step temp pe lx ly lz press
 
-# Minimize energy to optimize geometry . Cut - offs and steps from energy and forces .
-# minimize 1.0e-6 1.0e-8 1000 10000
 run 0
 WARNING: No fixes with time integration, atoms won't move (../verlet.cpp:60)
-Generated 0 of 0 mixed pair_coeff terms from geometric mixing rule
 Neighbor list info ...
   update: every = 1 steps, delay = 5 steps, check = yes
   max neighbors/atom: 2000, page size: 100000
-  master list distance cutoff = 20.3
-  ghost atom cutoff = 20.3
-  binsize = 10.15, bins = 1 1 1
+  master list distance cutoff = 5.85
+  ghost atom cutoff = 5.85
+  binsize = 2.925, bins = 2 2 2
   1 neighbor lists, perpetual/occasional/extra = 1 0 0
-  (1) pair lj/cut, perpetual
+  (1) pair eam, perpetual
       attributes: half, newton on
       pair build: half/bin/atomonly/newton
       stencil: half/bin/3d
       bin: standard
-Per MPI rank memory allocation (min/avg/max) = 3.141 | 3.141 | 3.141 Mbytes
+Per MPI rank memory allocation (min/avg/max) = 3.207 | 3.207 | 3.207 Mbytes
    Step          Temp          PotEng           Lx             Ly             Lz           Press     
-         0   0             -11.715192      4.085          4.085          4.085         -2638.6627    
-Loop time of 4.82e-07 on 1 procs for 0 steps with 4 atoms
+         0   0             -11.399703      4.095          4.095          4.095         -3768.3636    
+Loop time of 4.53e-07 on 1 procs for 0 steps with 4 atoms
 
-207.5% CPU use with 1 MPI tasks x no OpenMP threads
+0.0% CPU use with 1 MPI tasks x no OpenMP threads
 
 MPI task timing breakdown:
 Section |  min time  |  avg time  |  max time  |%varavg| %total
@@ -73,23 +71,24 @@ Neigh   | 0          | 0          | 0          |   0.0 |  0.00
 Comm    | 0          | 0          | 0          |   0.0 |  0.00
 Output  | 0          | 0          | 0          |   0.0 |  0.00
 Modify  | 0          | 0          | 0          |   0.0 |  0.00
-Other   |            | 4.82e-07   |            |       |100.00
+Other   |            | 4.53e-07   |            |       |100.00
 
 Nlocal:              4 ave           4 max           4 min
 Histogram: 1 0 0 0 0 0 0 0 0 0
-Nghost:           4626 ave        4626 max        4626 min
+Nghost:            168 ave         168 max         168 min
 Histogram: 1 0 0 0 0 0 0 0 0 0
-Neighs:           4184 ave        4184 max        4184 min
+Neighs:            108 ave         108 max         108 min
 Histogram: 1 0 0 0 0 0 0 0 0 0
 
-Total # of neighbors = 4184
-Ave neighs/atom = 1046
+Total # of neighbors = 108
+Ave neighs/atom = 27
 Neighbor list builds = 0
 Dangerous builds = 0
-variable pot_e equal pe
 
 # Save the final structure and trajectory .
 # write_data optimized_structure.data
+
+variable pot_e equal pe
 print "${lattice_constant} ${pot_e}" append energy_volume.dat
-4.085 -11.7151919135816
+4.095 -11.3997034865158
 Total wall time: 0:00:00
