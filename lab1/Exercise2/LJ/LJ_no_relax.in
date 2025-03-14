@@ -1,0 +1,29 @@
+# This section defines the units that you are using. The dimensions of your
+# simulation and the periodic boundary conditions.
+
+units metal
+dimension 3
+boundary p p p
+
+# Read the data file
+read_data Ag_supercell_14x14x14_vacancy.lmp
+
+# Define the Embedded Atom Potential
+pair_style lj/cut 10.0
+pair_coeff 1 1 0.341 2.648
+
+# Define neighbor list settings to improve computational efficiency .
+neighbor 0.3 bin
+neigh_modify delay 5 every 1
+
+# Allow isotropic box relaxation and atomic position relaxation .
+fix 1 all box/relax iso 0.0 vmax 0.001
+
+# Monitor thermodynamic properties with energy output at every step .
+thermo 1
+thermo_style custom step temp pe lx ly lz press
+
+run 0
+
+variable pot_e equal pe
+print "${pot_e}" append energy_with_vacancy_no_relax.dat
