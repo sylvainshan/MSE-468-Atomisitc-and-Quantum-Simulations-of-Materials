@@ -7,22 +7,23 @@ dimension 3
 boundary p p p
 
 # Read the data file
-variable n_layers equal 100
-variable n_vac equal 1
+variable n_layers equal 8
+variable n_vac equal 8
+
 variable datafile string "Ag_slab_nlayer${n_layers}_nvac${n_vac}.lmp"
-Ag_slab_nlayer100_nvac${n_vac}.lmp
-Ag_slab_nlayer100_nvac1.lmp
+Ag_slab_nlayer8_nvac${n_vac}.lmp
+Ag_slab_nlayer8_nvac8.lmp
 read_data ${datafile}
-read_data Ag_slab_nlayer100_nvac1.lmp
+read_data Ag_slab_nlayer8_nvac8.lmp
 Reading data file ...
-  orthogonal box = (0 0 0) to (4.082 4.082 412.282)
+  orthogonal box = (0 0 0) to (4.082 4.082 65.312)
   1 by 1 by 1 MPI processor grid
   reading atoms ...
-  400 atoms
-  read_data CPU = 0.004 seconds
+  32 atoms
+  read_data CPU = 0.008 seconds
 
 # Define the Embedded Atom Potential
-pair_style lj/cut 10.0
+pair_style lj/cut 20.0
 pair_coeff 1 1 0.341 2.648
 
 # Define neighbor list settings to improve computational efficiency .
@@ -36,73 +37,51 @@ fix 1 all box/relax iso 0.0 vmax 0.001
 thermo 1
 thermo_style custom step temp pe lx ly lz press
 
-minimize 1.0e-10 1.0e-12 1000 10000
-Switching to 'neigh_modify every 1 delay 0 check yes' setting during minimization
+run 0
+WARNING: No fixes with time integration, atoms won't move (../verlet.cpp:60)
 Generated 0 of 0 mixed pair_coeff terms from geometric mixing rule
 Neighbor list info ...
-  update: every = 1 steps, delay = 0 steps, check = yes
+  update: every = 1 steps, delay = 5 steps, check = yes
   max neighbors/atom: 2000, page size: 100000
-  master list distance cutoff = 10.3
-  ghost atom cutoff = 10.3
-  binsize = 5.15, bins = 1 1 81
+  master list distance cutoff = 20.3
+  ghost atom cutoff = 20.3
+  binsize = 10.15, bins = 1 1 7
   1 neighbor lists, perpetual/occasional/extra = 1 0 0
   (1) pair lj/cut, perpetual
       attributes: half, newton on
       pair build: half/bin/atomonly/newton
       stencil: half/bin/3d
       bin: standard
-WARNING: Energy due to 1 extra global DOFs will be included in minimizer energies
- (../min.cpp:219)
-Per MPI rank memory allocation (min/avg/max) = 8.141 | 8.141 | 8.141 Mbytes
+Per MPI rank memory allocation (min/avg/max) = 3.473 | 3.473 | 3.473 Mbytes
    Step          Temp          PotEng           Lx             Ly             Lz           Press     
-         0   0             -1146.726       4.082          4.082          412.282        11926.208    
-         1   0             -1146.7354      4.0822551      4.0822551      412.30777      11509.712    
-         2   0             -1146.74        4.0823827      4.0823827      412.32065      11301.705    
-         3   0             -1146.7423      4.0824465      4.0824465      412.32709      11197.762    
-         4   0             -1146.7434      4.0824784      4.0824784      412.33031      11145.806    
-         5   0             -1146.7435      4.0824823      4.0824823      412.33072      11139.312    
-         6   0             -1146.7436      4.0824826      4.0824826      412.33074      11138.906    
-         7   0             -1146.7436      4.0824827      4.0824827      412.33075      11138.703    
-         8   0             -1146.7436      4.0824828      4.0824828      412.33076      11138.652    
-         9   0             -1146.7436      4.0824828      4.0824828      412.33076      11138.627    
-        10   0             -1146.7436      4.0824828      4.0824828      412.33076      11138.614    
-        11   0             -1146.7436      4.0824828      4.0824828      412.33076      11138.614    
-Loop time of 0.216323 on 1 procs for 11 steps with 400 atoms
+         0   0             -88.567707      4.082          4.082          65.312         4703.2796    
+Loop time of 5.29e-07 on 1 procs for 0 steps with 32 atoms
 
-53.8% CPU use with 1 MPI tasks x no OpenMP threads
-
-Minimization stats:
-  Stopping criterion = linesearch alpha is zero
-  Energy initial, next-to-last, final = 
-     -1146.72601048821  -1146.74355793047  -1146.74355793047
-  Force two-norm initial, final = 153.41471 143.31785
-  Force max component initial, final = 153.40999 143.31286
-  Final line search alpha, max atom move = 4.1590577e-13 5.9604645e-11
-  Iterations, force evaluations = 11 150
+189.0% CPU use with 1 MPI tasks x no OpenMP threads
 
 MPI task timing breakdown:
 Section |  min time  |  avg time  |  max time  |%varavg| %total
 ---------------------------------------------------------------
-Pair    | 0.13612    | 0.13612    | 0.13612    |   0.0 | 62.92
-Neigh   | 0.034983   | 0.034983   | 0.034983   |   0.0 | 16.17
-Comm    | 0.014683   | 0.014683   | 0.014683   |   0.0 |  6.79
-Output  | 0.00075661 | 0.00075661 | 0.00075661 |   0.0 |  0.35
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
 Modify  | 0          | 0          | 0          |   0.0 |  0.00
-Other   |            | 0.02978    |            |       | 13.77
+Other   |            | 5.29e-07   |            |       |100.00
 
-Nlocal:            400 ave         400 max         400 min
+Nlocal:             32 ave          32 max          32 min
 Histogram: 1 0 0 0 0 0 0 0 0 0
-Nghost:          17260 ave       17260 max       17260 min
+Nghost:           5701 ave        5701 max        5701 min
 Histogram: 1 0 0 0 0 0 0 0 0 0
-Neighs:          49240 ave       49240 max       49240 min
+Neighs:          25624 ave       25624 max       25624 min
 Histogram: 1 0 0 0 0 0 0 0 0 0
 
-Total # of neighbors = 49240
-Ave neighs/atom = 123.1
-Neighbor list builds = 33
-Dangerous builds = 12
+Total # of neighbors = 25624
+Ave neighs/atom = 800.75
+Neighbor list builds = 0
+Dangerous builds = 0
 
 variable pot_e equal pe
-print "${n_layers} ${n_vac} ${pot_e}" append E_slab_relax.dat
-100 1 -1146.74355793047
+print "${n_layers} ${n_vac} ${pot_e}" append E_slab.dat
+8 8 -88.5677067976758
 Total wall time: 0:00:00
