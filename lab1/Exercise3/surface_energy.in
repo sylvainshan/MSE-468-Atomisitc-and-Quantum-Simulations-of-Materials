@@ -6,8 +6,8 @@ dimension 3
 boundary p p p
 
 # Read the data file
-variable n_layers equal 8
-variable n_vac equal 8
+variable n_layers equal 100
+variable n_vac equal 100
 
 variable datafile string "Ag_slab_nlayer${n_layers}_nvac${n_vac}.lmp"
 read_data ${datafile}

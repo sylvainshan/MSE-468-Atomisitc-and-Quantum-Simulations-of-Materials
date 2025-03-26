@@ -7,20 +7,20 @@ dimension 3
 boundary p p p
 
 # Read the data file
-variable n_layers equal 8
-variable n_vac equal 8
+variable n_layers equal 100
+variable n_vac equal 100
 
 variable datafile string "Ag_slab_nlayer${n_layers}_nvac${n_vac}.lmp"
-Ag_slab_nlayer8_nvac${n_vac}.lmp
-Ag_slab_nlayer8_nvac8.lmp
+Ag_slab_nlayer100_nvac${n_vac}.lmp
+Ag_slab_nlayer100_nvac100.lmp
 read_data ${datafile}
-read_data Ag_slab_nlayer8_nvac8.lmp
+read_data Ag_slab_nlayer100_nvac100.lmp
 Reading data file ...
-  orthogonal box = (0 0 0) to (4.082 4.082 65.312)
+  orthogonal box = (0 0 0) to (4.082 4.082 816.4)
   1 by 1 by 1 MPI processor grid
   reading atoms ...
-  32 atoms
-  read_data CPU = 0.008 seconds
+  400 atoms
+  read_data CPU = 0.007 seconds
 
 # Define the Embedded Atom Potential
 pair_style lj/cut 20.0
@@ -45,19 +45,19 @@ Neighbor list info ...
   max neighbors/atom: 2000, page size: 100000
   master list distance cutoff = 20.3
   ghost atom cutoff = 20.3
-  binsize = 10.15, bins = 1 1 7
+  binsize = 10.15, bins = 1 1 81
   1 neighbor lists, perpetual/occasional/extra = 1 0 0
   (1) pair lj/cut, perpetual
       attributes: half, newton on
       pair build: half/bin/atomonly/newton
       stencil: half/bin/3d
       bin: standard
-Per MPI rank memory allocation (min/avg/max) = 3.473 | 3.473 | 3.473 Mbytes
+Per MPI rank memory allocation (min/avg/max) = 10.28 | 10.28 | 10.28 Mbytes
    Step          Temp          PotEng           Lx             Ly             Lz           Press     
-         0   0             -88.567707      4.082          4.082          65.312         4703.2796    
-Loop time of 5.29e-07 on 1 procs for 0 steps with 32 atoms
+         0   0             -1166.3997      4.082          4.082          816.4          1389.0296    
+Loop time of 6.29e-07 on 1 procs for 0 steps with 400 atoms
 
-189.0% CPU use with 1 MPI tasks x no OpenMP threads
+0.0% CPU use with 1 MPI tasks x no OpenMP threads
 
 MPI task timing breakdown:
 Section |  min time  |  avg time  |  max time  |%varavg| %total
@@ -67,21 +67,21 @@ Neigh   | 0          | 0          | 0          |   0.0 |  0.00
 Comm    | 0          | 0          | 0          |   0.0 |  0.00
 Output  | 0          | 0          | 0          |   0.0 |  0.00
 Modify  | 0          | 0          | 0          |   0.0 |  0.00
-Other   |            | 5.29e-07   |            |       |100.00
+Other   |            | 6.29e-07   |            |       |100.00
 
-Nlocal:             32 ave          32 max          32 min
+Nlocal:            400 ave         400 max         400 min
 Histogram: 1 0 0 0 0 0 0 0 0 0
-Nghost:           5701 ave        5701 max        5701 min
+Nghost:          45905 ave       45905 max       45905 min
 Histogram: 1 0 0 0 0 0 0 0 0 0
-Neighs:          25624 ave       25624 max       25624 min
+Neighs:         410552 ave      410552 max      410552 min
 Histogram: 1 0 0 0 0 0 0 0 0 0
 
-Total # of neighbors = 25624
-Ave neighs/atom = 800.75
+Total # of neighbors = 410552
+Ave neighs/atom = 1026.38
 Neighbor list builds = 0
 Dangerous builds = 0
 
 variable pot_e equal pe
 print "${n_layers} ${n_vac} ${pot_e}" append E_slab.dat
-8 8 -88.5677067976758
+100 100 -1166.39971294541
 Total wall time: 0:00:00

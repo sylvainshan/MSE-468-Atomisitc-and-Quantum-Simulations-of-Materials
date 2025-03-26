@@ -1,0 +1,74 @@
+# ========== Initialization ==========
+units           metal
+atom_style      atomic
+boundary        p p p
+dimension       3
+
+
+# ========== Simulation Box ==========
+# L1₀ structure: Tetragonal lattice (a, a, c)
+# Experimental lattice parameters
+
+variable a      equal  7    # in-plane lattice constant (Å)
+variable c      equal  5   # out-of-plane (Å)
+variable a2     equal ${a}/2
+variable c2     equal ${c}/2
+
+region          box block 0 ${a} 0 ${a} 0 ${c} units box
+create_box      2 box
+
+# ========== Atomic Positions ==========
+# L1₀ basis atoms (example positions; verify with literature):
+# Cu at (0,0,0), Au at (0.5a, 0.5a, 0.5c)
+
+create_atoms    1 single 0 0 0
+create_atoms    2 single ${a2} ${a2} ${c2}
+
+# ========== Mass Definitions ==========
+# Define masses for Cu (type 1) and Au (type 2)
+mass            1 63.546   # Mass of Cu 
+mass            2 196.967  # Mass of Au 
+
+
+# ========== Potential Definition ==========
+# Lennard-Jones parameters
+variable eps_Cu equal 0.20476023750639274  
+variable sig_Cu equal 2.3304991448639614  
+variable eps_Au equal 0.22940574007475698  
+variable sig_Au equal 2.629013453555011  
+
+# Geometric mixing rule for cross terms:
+variable eps_mix equal sqrt(v_eps_Cu*v_eps_Au)
+variable sig_mix equal sqrt(v_sig_Cu*v_sig_Au)
+
+pair_style      lj/cut 10.0  
+pair_coeff      1 1 ${eps_Cu} ${sig_Cu}
+pair_coeff      2 2 ${eps_Au} ${sig_Au}
+pair_coeff      1 2 ${eps_mix} ${sig_mix}
+
+
+# ========== Simulation Settings ==========
+neighbor        0.3 bin
+neigh_modify    delay 5 every 1
+
+fix             1 all box/relax aniso 0.0 vmax 0.001
+
+
+# ========== Output Initial Configuration ==========
+write_data      initial_configuration.data
+
+
+# ========== Log File with a and c Values in Filename ==========
+variable logfile string "log_a${a}_c${c}_LJ.txt"
+log ${logfile}
+
+
+# ========== Energy Minimization ==========
+thermo          1
+thermo_style    custom step pe lx ly lz vol temp press
+minimize 1.0e-10 1.0e-10 1000000 100000
+
+
+
+# ========== Output Final Structure ==========
+write_data      optimized_structure.data pair ij
