@@ -1,0 +1,146 @@
+CaO.scf.a=9.00.ecut=10.k=4.out:     Forces acting on atoms (cartesian axes, Ry/au):
+CaO.scf.a=9.00.ecut=10.k=4.out-
+CaO.scf.a=9.00.ecut=10.k=4.out-     atom    1 type  1   force =     0.00000000    0.00000000   -0.15013545
+CaO.scf.a=9.00.ecut=10.k=4.out-     atom    2 type  2   force =     0.00000000    0.00000000    0.15013545
+CaO.scf.a=9.00.ecut=10.k=4.out-
+CaO.scf.a=9.00.ecut=10.k=4.out-     Total force =     0.212324     Total SCF correction =     0.000057
+--
+CaO.scf.a=9.00.ecut=100.k=4.out:     Forces acting on atoms (cartesian axes, Ry/au):
+CaO.scf.a=9.00.ecut=100.k=4.out-
+CaO.scf.a=9.00.ecut=100.k=4.out-     atom    1 type  1   force =    -0.00000000   -0.00000000   -0.04314918
+CaO.scf.a=9.00.ecut=100.k=4.out-     atom    2 type  2   force =     0.00000000    0.00000000    0.04314918
+CaO.scf.a=9.00.ecut=100.k=4.out-
+CaO.scf.a=9.00.ecut=100.k=4.out-     Total force =     0.061022     Total SCF correction =     0.000015
+--
+CaO.scf.a=9.00.ecut=1000.k=4.out:     Forces acting on atoms (cartesian axes, Ry/au):
+CaO.scf.a=9.00.ecut=1000.k=4.out-
+CaO.scf.a=9.00.ecut=1000.k=4.out-     atom    1 type  1   force =     0.00000000    0.00000000   -0.04311006
+CaO.scf.a=9.00.ecut=1000.k=4.out-     atom    2 type  2   force =    -0.00000000   -0.00000000    0.04311006
+CaO.scf.a=9.00.ecut=1000.k=4.out-
+CaO.scf.a=9.00.ecut=1000.k=4.out-     Total force =     0.060967     Total SCF correction =     0.000141
+--
+CaO.scf.a=9.00.ecut=110.k=4.out:     Forces acting on atoms (cartesian axes, Ry/au):
+CaO.scf.a=9.00.ecut=110.k=4.out-
+CaO.scf.a=9.00.ecut=110.k=4.out-     atom    1 type  1   force =     0.00000000    0.00000000   -0.04314485
+CaO.scf.a=9.00.ecut=110.k=4.out-     atom    2 type  2   force =     0.00000000    0.00000000    0.04314485
+CaO.scf.a=9.00.ecut=110.k=4.out-
+CaO.scf.a=9.00.ecut=110.k=4.out-     Total force =     0.061016     Total SCF correction =     0.000031
+--
+CaO.scf.a=9.00.ecut=120.k=4.out:     Forces acting on atoms (cartesian axes, Ry/au):
+CaO.scf.a=9.00.ecut=120.k=4.out-
+CaO.scf.a=9.00.ecut=120.k=4.out-     atom    1 type  1   force =     0.00000000    0.00000000   -0.04312788
+CaO.scf.a=9.00.ecut=120.k=4.out-     atom    2 type  2   force =    -0.00000000   -0.00000000    0.04312788
+CaO.scf.a=9.00.ecut=120.k=4.out-
+CaO.scf.a=9.00.ecut=120.k=4.out-     Total force =     0.060992     Total SCF correction =     0.000018
+--
+CaO.scf.a=9.00.ecut=130.k=4.out:     Forces acting on atoms (cartesian axes, Ry/au):
+CaO.scf.a=9.00.ecut=130.k=4.out-
+CaO.scf.a=9.00.ecut=130.k=4.out-     atom    1 type  1   force =     0.00000000    0.00000000   -0.04313501
+CaO.scf.a=9.00.ecut=130.k=4.out-     atom    2 type  2   force =    -0.00000000   -0.00000000    0.04313501
+CaO.scf.a=9.00.ecut=130.k=4.out-
+CaO.scf.a=9.00.ecut=130.k=4.out-     Total force =     0.061002     Total SCF correction =     0.000092
+--
+CaO.scf.a=9.00.ecut=140.k=4.out:     Forces acting on atoms (cartesian axes, Ry/au):
+CaO.scf.a=9.00.ecut=140.k=4.out-
+CaO.scf.a=9.00.ecut=140.k=4.out-     atom    1 type  1   force =     0.00000000    0.00000000   -0.04313033
+CaO.scf.a=9.00.ecut=140.k=4.out-     atom    2 type  2   force =     0.00000000    0.00000000    0.04313033
+CaO.scf.a=9.00.ecut=140.k=4.out-
+CaO.scf.a=9.00.ecut=140.k=4.out-     Total force =     0.060995     Total SCF correction =     0.000071
+--
+CaO.scf.a=9.00.ecut=150.k=4.out:     Forces acting on atoms (cartesian axes, Ry/au):
+CaO.scf.a=9.00.ecut=150.k=4.out-
+CaO.scf.a=9.00.ecut=150.k=4.out-     atom    1 type  1   force =     0.00000000    0.00000000   -0.04315994
+CaO.scf.a=9.00.ecut=150.k=4.out-     atom    2 type  2   force =     0.00000000    0.00000000    0.04315994
+CaO.scf.a=9.00.ecut=150.k=4.out-
+CaO.scf.a=9.00.ecut=150.k=4.out-     Total force =     0.061037     Total SCF correction =     0.000018
+--
+CaO.scf.a=9.00.ecut=160.k=4.out:     Forces acting on atoms (cartesian axes, Ry/au):
+CaO.scf.a=9.00.ecut=160.k=4.out-
+CaO.scf.a=9.00.ecut=160.k=4.out-     atom    1 type  1   force =    -0.00000000   -0.00000000   -0.04313989
+CaO.scf.a=9.00.ecut=160.k=4.out-     atom    2 type  2   force =     0.00000000    0.00000000    0.04313989
+CaO.scf.a=9.00.ecut=160.k=4.out-
+CaO.scf.a=9.00.ecut=160.k=4.out-     Total force =     0.061009     Total SCF correction =     0.000084
+--
+CaO.scf.a=9.00.ecut=170.k=4.out:     Forces acting on atoms (cartesian axes, Ry/au):
+CaO.scf.a=9.00.ecut=170.k=4.out-
+CaO.scf.a=9.00.ecut=170.k=4.out-     atom    1 type  1   force =     0.00000000    0.00000000   -0.04316482
+CaO.scf.a=9.00.ecut=170.k=4.out-     atom    2 type  2   force =    -0.00000000   -0.00000000    0.04316482
+CaO.scf.a=9.00.ecut=170.k=4.out-
+CaO.scf.a=9.00.ecut=170.k=4.out-     Total force =     0.061044     Total SCF correction =     0.000045
+--
+CaO.scf.a=9.00.ecut=180.k=4.out:     Forces acting on atoms (cartesian axes, Ry/au):
+CaO.scf.a=9.00.ecut=180.k=4.out-
+CaO.scf.a=9.00.ecut=180.k=4.out-     atom    1 type  1   force =     0.00000000    0.00000000   -0.04314862
+CaO.scf.a=9.00.ecut=180.k=4.out-     atom    2 type  2   force =     0.00000000    0.00000000    0.04314862
+CaO.scf.a=9.00.ecut=180.k=4.out-
+CaO.scf.a=9.00.ecut=180.k=4.out-     Total force =     0.061021     Total SCF correction =     0.000057
+--
+CaO.scf.a=9.00.ecut=190.k=4.out:     Forces acting on atoms (cartesian axes, Ry/au):
+CaO.scf.a=9.00.ecut=190.k=4.out-
+CaO.scf.a=9.00.ecut=190.k=4.out-     atom    1 type  1   force =     0.00000000    0.00000000   -0.04316173
+CaO.scf.a=9.00.ecut=190.k=4.out-     atom    2 type  2   force =    -0.00000000   -0.00000000    0.04316173
+CaO.scf.a=9.00.ecut=190.k=4.out-
+CaO.scf.a=9.00.ecut=190.k=4.out-     Total force =     0.061040     Total SCF correction =     0.000032
+--
+CaO.scf.a=9.00.ecut=20.k=4.out:     Forces acting on atoms (cartesian axes, Ry/au):
+CaO.scf.a=9.00.ecut=20.k=4.out-
+CaO.scf.a=9.00.ecut=20.k=4.out-     atom    1 type  1   force =     0.00000000    0.00000000   -0.09361267
+CaO.scf.a=9.00.ecut=20.k=4.out-     atom    2 type  2   force =     0.00000000    0.00000000    0.09361267
+CaO.scf.a=9.00.ecut=20.k=4.out-
+CaO.scf.a=9.00.ecut=20.k=4.out-     Total force =     0.132388     Total SCF correction =     0.000024
+--
+CaO.scf.a=9.00.ecut=200.k=4.out:     Forces acting on atoms (cartesian axes, Ry/au):
+CaO.scf.a=9.00.ecut=200.k=4.out-
+CaO.scf.a=9.00.ecut=200.k=4.out-     atom    1 type  1   force =     0.00000000    0.00000000   -0.04315360
+CaO.scf.a=9.00.ecut=200.k=4.out-     atom    2 type  2   force =     0.00000000    0.00000000    0.04315360
+CaO.scf.a=9.00.ecut=200.k=4.out-
+CaO.scf.a=9.00.ecut=200.k=4.out-     Total force =     0.061028     Total SCF correction =     0.000051
+--
+CaO.scf.a=9.00.ecut=30.k=4.out:     Forces acting on atoms (cartesian axes, Ry/au):
+CaO.scf.a=9.00.ecut=30.k=4.out-
+CaO.scf.a=9.00.ecut=30.k=4.out-     atom    1 type  1   force =     0.00000000    0.00000000   -0.03532166
+CaO.scf.a=9.00.ecut=30.k=4.out-     atom    2 type  2   force =     0.00000000    0.00000000    0.03532166
+CaO.scf.a=9.00.ecut=30.k=4.out-
+CaO.scf.a=9.00.ecut=30.k=4.out-     Total force =     0.049952     Total SCF correction =     0.000035
+--
+CaO.scf.a=9.00.ecut=40.k=4.out:     Forces acting on atoms (cartesian axes, Ry/au):
+CaO.scf.a=9.00.ecut=40.k=4.out-
+CaO.scf.a=9.00.ecut=40.k=4.out-     atom    1 type  1   force =     0.00000000    0.00000000   -0.04531891
+CaO.scf.a=9.00.ecut=40.k=4.out-     atom    2 type  2   force =     0.00000000    0.00000000    0.04531891
+CaO.scf.a=9.00.ecut=40.k=4.out-
+CaO.scf.a=9.00.ecut=40.k=4.out-     Total force =     0.064091     Total SCF correction =     0.000210
+--
+CaO.scf.a=9.00.ecut=50.k=4.out:     Forces acting on atoms (cartesian axes, Ry/au):
+CaO.scf.a=9.00.ecut=50.k=4.out-
+CaO.scf.a=9.00.ecut=50.k=4.out-     atom    1 type  1   force =    -0.00000000   -0.00000000   -0.04289452
+CaO.scf.a=9.00.ecut=50.k=4.out-     atom    2 type  2   force =     0.00000000    0.00000000    0.04289452
+CaO.scf.a=9.00.ecut=50.k=4.out-
+CaO.scf.a=9.00.ecut=50.k=4.out-     Total force =     0.060662     Total SCF correction =     0.000107
+--
+CaO.scf.a=9.00.ecut=60.k=4.out:     Forces acting on atoms (cartesian axes, Ry/au):
+CaO.scf.a=9.00.ecut=60.k=4.out-
+CaO.scf.a=9.00.ecut=60.k=4.out-     atom    1 type  1   force =     0.00000000    0.00000000   -0.04320386
+CaO.scf.a=9.00.ecut=60.k=4.out-     atom    2 type  2   force =     0.00000000    0.00000000    0.04320386
+CaO.scf.a=9.00.ecut=60.k=4.out-
+CaO.scf.a=9.00.ecut=60.k=4.out-     Total force =     0.061099     Total SCF correction =     0.000026
+--
+CaO.scf.a=9.00.ecut=70.k=4.out:     Forces acting on atoms (cartesian axes, Ry/au):
+CaO.scf.a=9.00.ecut=70.k=4.out-
+CaO.scf.a=9.00.ecut=70.k=4.out-     atom    1 type  1   force =     0.00000000    0.00000000   -0.04312758
+CaO.scf.a=9.00.ecut=70.k=4.out-     atom    2 type  2   force =     0.00000000    0.00000000    0.04312758
+CaO.scf.a=9.00.ecut=70.k=4.out-
+CaO.scf.a=9.00.ecut=70.k=4.out-     Total force =     0.060992     Total SCF correction =     0.000107
+--
+CaO.scf.a=9.00.ecut=80.k=4.out:     Forces acting on atoms (cartesian axes, Ry/au):
+CaO.scf.a=9.00.ecut=80.k=4.out-
+CaO.scf.a=9.00.ecut=80.k=4.out-     atom    1 type  1   force =    -0.00000000   -0.00000000   -0.04313528
+CaO.scf.a=9.00.ecut=80.k=4.out-     atom    2 type  2   force =     0.00000000    0.00000000    0.04313528
+CaO.scf.a=9.00.ecut=80.k=4.out-
+CaO.scf.a=9.00.ecut=80.k=4.out-     Total force =     0.061002     Total SCF correction =     0.000035
+--
+CaO.scf.a=9.00.ecut=90.k=4.out:     Forces acting on atoms (cartesian axes, Ry/au):
+CaO.scf.a=9.00.ecut=90.k=4.out-
+CaO.scf.a=9.00.ecut=90.k=4.out-     atom    1 type  1   force =     0.00000000    0.00000000   -0.04314787
+CaO.scf.a=9.00.ecut=90.k=4.out-     atom    2 type  2   force =     0.00000000    0.00000000    0.04314787
+CaO.scf.a=9.00.ecut=90.k=4.out-
+CaO.scf.a=9.00.ecut=90.k=4.out-     Total force =     0.061020     Total SCF correction =     0.000088

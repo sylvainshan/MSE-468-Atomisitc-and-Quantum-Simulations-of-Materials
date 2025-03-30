@@ -1,0 +1,14 @@
+grep "!    total energy" *.out | awk -F'[:=]' '{
+    # Extraire ecut depuis le nom du fichier
+    ecut = "";
+    if (match($1, /ecut=[0-9]+/)) {
+        ecut = substr($1, RSTART+5, RLENGTH-5);
+    }
+    
+    # Extraire lénergie (dernière valeur avant "Ry")
+    energy = $NF;                   # Dernière colonne
+    gsub(/ Ry/, "", energy);        # Supprimer "Ry"
+    gsub(/ +/, "", energy);         # Supprimer les espaces
+    
+    print ecut, energy
+}' | sort -nr -k1,1 > energies.dat
