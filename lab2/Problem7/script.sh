@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
 # Input data:
-LISTA="9.00"      # List of values of lattice parameter to try
-LISTECUT="20 30"  # List of plane-wave cutoffs to try
-LISTK="2 4"       # List of number of k-points per dimension to try
+LISTA=$(seq 9 0.005 9.25 )      # List of values of lattice parameter to try
+LISTECUT="70"  # List of plane-wave cutoffs to try
+LISTK="6"       # List of number of k-points per dimension to try
 
 # Files of interest:
 TMP_DIR="./tmp"                 # where temporary data will be stored
 PSEUDO_DIR="./pseudopotentials" # where pseudopotentials are stored
-OUT_DIR="./simulations"         # where input and output will be
+OUT_DIR="./simulations_k=6"         # where input and output will be
                                 # created once the script runs.
 
 PW_LAUNCH='pw.x'         # This is QE executable file.

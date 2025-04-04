@@ -16,11 +16,11 @@
   - What changes when using ultra-soft potenetials []
  
 # Problem 7 
-- Determination of the equilibrium lattice parameter with the energy-volume profile  []
+- Determination of the equilibrium lattice parameter with the energy-volume profile  [**DONE**]
 
 # Problem 8
 - Compute the bulk modulus from results in Problem 7, analytical derivation []
-- Compute the bulk modulus with third-order Birch-Murnaghan isothermal equation of state []
+- Compute the bulk modulus with third-order Birch-Murnaghan isothermal equation of state [**DONE**]
 - Compare the two methods and explain discrepancies []
 
 # Problem 9
