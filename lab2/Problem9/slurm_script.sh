@@ -1,7 +1,19 @@
 #!/usr/bin/env bash
+#SBATCH --nodes 1
+#SBATCH --ntasks 18
+#SBATCH --cpus-per-task 1
+#SBATCH --time=04:00:00
+#SBATCH --mem=30000
+#SBATCH --qos=build
+
+# Load modules
+module purge
+module load intel
+module load intel-oneapi-mpi
+module load quantum-espresso
 
 # Input data:
-LISTX="0.00"      # Liste des valeurs de déformation (strain x)
+LISTX=$(seq 0.05 0.01 0.1)      # Liste des valeurs de déformation (strain x)
 LISTECUT="70"                    # Cutoff des ondes planes
 LISTK="4"                        # Nombre de k-points par dimension
 
@@ -9,11 +21,11 @@ LISTK="4"                        # Nombre de k-points par dimension
 a0=9.11
 
 # Répertoires
-TMP_DIR="./tmp"                 
-PSEUDO_DIR="./pseudopotentials" 
-OUT_DIR="./tetragonal_strain"   
+TMP_DIR="./tmp"
+PSEUDO_DIR="./pseudopotentials"
+OUT_DIR="./tetragonal_strain"
 
-PW_LAUNCH='mpirun pw.x'  # Exécutable de Quantum ESPRESSO
+PW_LAUNCH='srun pw.x'  # Exécutable de Quantum ESPRESSO
 
 # Création des répertoires si non existants
 mkdir -p $TMP_DIR
@@ -56,4 +68,3 @@ done
 
 # Nettoyage des fichiers temporaires
 rm -r $TMP_DIR/*
-
