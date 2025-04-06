@@ -11,7 +11,7 @@ a0=9.11
 # Répertoires
 TMP_DIR="./tmp"                 
 PSEUDO_DIR="./pseudopotentials" 
-OUT_DIR="./tetragonal_strain"   
+OUT_DIR="./tetragonal_strain_c44"   
 
 PW_LAUNCH='mpirun pw.x'  # Exécutable de Quantum ESPRESSO
 
@@ -27,14 +27,15 @@ for ecut in $LISTECUT; do
          OUTPUT="$OUT_DIR/CaO.scf.x=$x.ecut=$ecut.k=$k.out"
 
          # Copier le fichier d'entrée de base
-         cp CaO_conventional.scf.in $INPUT
+         cp CaO_conventional_c44.scf.in $INPUT
 
          # Calcul des nouveaux paramètres de réseau
-         new_a1=$(echo "$a0 * (1+$x)" | bc -l)
-         new_a2=$(echo "$a0 * (1-$x)" | bc -l)
-         new_a3=$(echo "$a0 * (1 + $x^2 / (1-$x^2))" | bc -l)
+         new_a1=$(echo "$a0 * sqrt(1 + ($x^2)/4)" | bc -l)
+         new_a2=$(echo "$a0 * sqrt(1 + ($x^2)/4)" | bc -l)
+         new_a3=$(echo "$a0 * (1 + ($x^2)/(4 - ($x^2)))" | bc -l)
          ratio1=$(echo "$new_a2 / $new_a1" | bc -l)
          ratio2=$(echo "$new_a3 / $new_a1" | bc -l)
+         angle=$(echo "$x / (1 + ($x^2)/4)" | bc -l)
 
          # Modifier le fichier d'entrée avec les nouveaux paramètres
          sed -i "s/    prefix = .*/    prefix = 'CaO.$x.$ecut.$k'/g" $INPUT
@@ -43,6 +44,7 @@ for ecut in $LISTECUT; do
          sed -i "s/    celldm(1) = .*/    celldm(1) = $new_a1/g" $INPUT
          sed -i "s/    celldm(2) = .*/    celldm(2) = $ratio1/g" $INPUT
          sed -i "s/    celldm(3) = .*/    celldm(3) = $ratio2/g" $INPUT
+         sed -i "s/    celldm(4) = .*/    celldm(4) = $angle/g" $INPUT
          sed -i "s/    ecutwfc = .*/    ecutwfc = $ecut/g" $INPUT
          sed -i "/K_POINTS/{n;s/.*/    $k $k $k 0 0 0 /}" $INPUT
 
