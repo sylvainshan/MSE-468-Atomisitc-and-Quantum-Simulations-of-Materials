@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
 # Input data:
-LISTA="9.05"      # List of values of lattice parameter to try
-LISTECUT="20 30 40 50 60 70 80 90 100 1000"  # List of plane-wave cutoffs to try
-LISTK="4"       # List of number of k-points per dimension to try
+LISTA="9.00"      # List of values of lattice parameter to try
+LISTECUT="1000"  # List of plane-wave cutoffs to try
+LISTK="8"       # List of number of k-points per dimension to try
 
 # Files of interest:
 TMP_DIR="./tmp"                 # where temporary data will be stored
 PSEUDO_DIR="./pseudopotentials" # where pseudopotentials are stored
-OUT_DIR="./simulations_k=4_a=9.05"         # where input and output will be
+OUT_DIR="./simulations_k=8_a=9.00"         # where input and output will be
                                 # created once the script runs.
 
 PW_LAUNCH='mpirun pw.x'         # This is QE executable file.

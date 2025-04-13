@@ -2,7 +2,11 @@ CaO.scf.a=9.00.ecut=80.k=10.out:     number of k points=    47
 CaO.scf.a=9.00.ecut=80.k=12.out:     number of k points=    72
 CaO.scf.a=9.00.ecut=80.k=14.out:     number of k points=   104
 CaO.scf.a=9.00.ecut=80.k=16.out:     number of k points=   145
+CaO.scf.a=9.00.ecut=80.k=18.out:     number of k points=   195
 CaO.scf.a=9.00.ecut=80.k=2.out:     number of k points=     3
+CaO.scf.a=9.00.ecut=80.k=20.out:     number of k points=   256
+CaO.scf.a=9.00.ecut=80.k=22.out:     number of k points=   328
+CaO.scf.a=9.00.ecut=80.k=24.out:     number of k points=   413
 CaO.scf.a=9.00.ecut=80.k=4.out:     number of k points=     8
 CaO.scf.a=9.00.ecut=80.k=6.out:     number of k points=    16
 CaO.scf.a=9.00.ecut=80.k=8.out:     number of k points=    29
