@@ -21,7 +21,7 @@ else
     fi
 
     # Bombs away!
-    $executable -in $1 > ${1%.in}.out 2> /dev/null
+    mpirun $executable -in $1 > ${1%.in}.out 2> /dev/null
 
     EN=` grep ! scf.out | egrep -o "([+-])?[0-9]+(\.[0-9]+)?" `
     if [[ -n $EN ]]; then echo "Energy = ${EN} Ry"; fi
