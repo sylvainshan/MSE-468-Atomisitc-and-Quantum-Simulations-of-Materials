@@ -1,0 +1,6 @@
+&projwfc
+    prefix = 'MgO'
+    outdir = '../tmp'
+    filpdos = 'MgO-pdos.dat'
+    lwrite_overlaps = .true.
+/

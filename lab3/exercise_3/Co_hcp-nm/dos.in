@@ -1,0 +1,6 @@
+&DOS
+  outdir='../temp/'
+  prefix='Co_hcp-nm'
+  fildos='Co_hcp-nm.dos'
+  DeltaE=0.1
+/

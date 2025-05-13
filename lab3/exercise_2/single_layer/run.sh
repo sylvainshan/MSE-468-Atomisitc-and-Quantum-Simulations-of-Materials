@@ -7,16 +7,16 @@
 
 # Bugfix for oneapi issue
 # NOTE: This is only needed on helvetios, uncomment if running there.
-# export FI_PROVIDER=verbs
+export FI_PROVIDER=verbs
 
 #These are the libraries necessary for our code to run
 # NOTE: This is only needed on helvetios, uncomment them if running there.
-# module purge
-# module load intel/2021.6.0  intel-oneapi-mpi/2021.6.0 quantum-espresso/7.2-mpi
+module purge
+module load intel/2021.6.0  intel-oneapi-mpi/2021.6.0 quantum-espresso/7.2-mpi
 
 
-# PW_LAUCHER="srun" # Use this line for helvetios
-PW_LAUCHER="mpirun" # Use this for the Virtual Machine
+PW_LAUCHER="srun" # Use this line for helvetios
+# PW_LAUCHER="mpirun" # Use this for the Virtual Machine
 
 # ---------------
 # Run

@@ -1,0 +1,30 @@
+&control
+    calculation = 'scf'
+    restart_mode = 'from_scratch'
+    prefix = 'CaO'
+    tstress = .true.
+    tprnfor = .true.
+    pseudo_dir = './pseudopotentials/'
+    outdir = './tmp/'
+/
+&system
+    ibrav = 2
+    celldm(1) = 9.0
+    nat = 2
+    ntyp = 2
+    ecutwfc = 20.0
+/
+&electrons
+    diagonalization = 'david'
+    mixing_mode = 'plain'
+    mixing_beta = 0.7
+    conv_thr = 1.0d-8
+/
+ATOMIC_SPECIES
+    Ca  1.0    Ca_pseudo_dojo_v0.5.upf
+    O   1.0    O_pseudo_dojo_v0.5.upf
+ATOMIC_POSITIONS alat
+    Ca 0.00 0.00 0.00
+    O  0.50 0.00 0.00
+K_POINTS automatic
+    4 4 4 0 0 0

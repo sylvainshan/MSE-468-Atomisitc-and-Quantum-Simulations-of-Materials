@@ -1,0 +1,9 @@
+&dos
+    prefix = 'MgO'
+    outdir = '../tmp'    
+    fildos = 'MgO-dos.dat'
+    Emin =  -20  
+    Emax = 32.0  
+    DeltaE = 0.1
+/
+

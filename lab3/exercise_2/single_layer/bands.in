@@ -1,0 +1,38 @@
+&control
+  calculation  = 'bands'
+  restart_mode = 'from_scratch'
+  prefix       = 'MoS2'
+  pseudo_dir   = '../PP'
+  outdir       = './out'
+ /
+&system
+  ibrav=4, 
+  celldm(1) = 5.97
+  celldm(3) = < TO COMPLETE >
+  nat       = 3
+  ntyp      = 2
+  ecutwfc   = 40
+  ecutrho   = 600
+  input_dft = 'VDW-DF2-C09'
+  nbnd      = < TO COMPLETE >
+/
+&ELECTRONS
+  conv_thr =   1.0000000000d-8,
+  electron_maxstep = 200,
+  mixing_beta =   3.0000000000d-01,
+  mixing_mode = 'plain',
+  startingwfc = 'atomic+random',
+/
+&IONS
+/
+K_POINTS crystal_b  
+< TO COMPLETE >
+
+ATOMIC_SPECIES
+Mo  95.940000 Mo.pbe-spn-rrkjus-tested-pslib025.UPF
+S   32.066000 S.pbe-n-rrkjus-tested-pslib025.UPF
+
+ATOMIC_POSITIONS alat
+Mo            0.0000000000        0.5773503000        0.0000000000
+S             0.5000000000        0.2886751000       -0.4972868527
+S             0.5000000000        0.2886751000        0.4972868527

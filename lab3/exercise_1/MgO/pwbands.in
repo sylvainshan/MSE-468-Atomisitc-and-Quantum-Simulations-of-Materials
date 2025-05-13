@@ -1,0 +1,36 @@
+&control
+    calculation = 'bands'
+    restart_mode = 'from_scratch'
+    prefix = 'MgO'
+    pseudo_dir = '../PP'
+    outdir = '../tmp'
+/
+&system
+    ibrav = 2
+    celldm(1) = 8.0374557182
+    nat = 2
+    ntyp = 2
+    ecutwfc = 50
+    ecutrho = 400
+    nbnd = 20
+/
+&electrons
+    diagonalization = 'david'
+    mixing_mode = 'plain'
+    mixing_beta = 0.7
+    conv_thr = 1.0d-8
+/
+ATOMIC_SPECIES
+    Mg  24.0350   Mg.pbe-n-kjpaw_psl.0.3.0.UPF
+    O   15.9994   O.pbe-n-kjpaw_psl.0.1.UPF
+ATOMIC_POSITIONS (alat)
+Mg      0.000000000  0.000000000  0.000000000
+O       0.500000000  0.500000000  0.500000000
+K_POINTS  tpiba_b   
+6
+1.000 0.500 0.000 35 !W
+0.500 0.500 0.500 43 !L
+0.000 0.000 0.000 50 !G
+1.000 0.000 0.000 25 !X
+1.000 0.500 0.000 17 !W
+0.750 0.750 0.000 1  !K
