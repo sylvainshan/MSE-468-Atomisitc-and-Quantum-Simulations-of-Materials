@@ -6,15 +6,15 @@
   outdir       = './out'
  /
 &system
-  ibrav=4, 
+  ibrav=4,
   celldm(1) = 5.97
-  celldm(3) = < TO COMPLETE >
+  celldm(3) = 50
   nat       = 3
   ntyp      = 2
   ecutwfc   = 40
   ecutrho   = 600
   input_dft = 'VDW-DF2-C09'
-  nbnd      = < TO COMPLETE >
+  nbnd      = 17
 /
 &ELECTRONS
   conv_thr =   1.0000000000d-8,
@@ -25,8 +25,12 @@
 /
 &IONS
 /
-K_POINTS crystal_b  
-< TO COMPLETE >
+K_POINTS crystal_b
+4
+0.3333 0.3333 0 47 !K
+0      0      0 50 !G
+0.5    0      0 37 !M
+0.3333 0.3333 0 1  !K
 
 ATOMIC_SPECIES
 Mo  95.940000 Mo.pbe-spn-rrkjus-tested-pslib025.UPF

@@ -47,7 +47,7 @@ def set_mpl_params():
 
     # Customize grid
     matplotlib.rcParams['grid.color'] = 'gray'       # Grid color
-    matplotlib.rcParams['grid.linestyle'] = '-'      # Grid line style
+    matplotlib.rcParams['grid.linestyle'] = ':'      # Grid line style
     matplotlib.rcParams['grid.linewidth'] = 0.5      # Grid line width
 
     # Customize lines
