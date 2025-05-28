@@ -2,9 +2,9 @@ import matplotlib
 import matplotlib.pyplot as plt
 import pandas as pd 
 import numpy as np
-import lmfit
 import os
-from lmfit import report_ci, conf_interval
+import lmfit
+from lmfit import report_ci, conf_interval, Model
 from mpl_toolkits.axes_grid1.inset_locator import inset_axes, mark_inset
 
 
@@ -62,9 +62,9 @@ def set_latex_fonts():
 #     TIMESTEP CONVERGENCE
 # =============================
 
-def load_energy_data(filepath): 
+def load_data(filepath): 
     data = pd.read_csv(filepath, sep="\t", comment="#", header=None)
-    data.columns = ['t (ps)', 'T (K)', 'E (eV)', 'K (eV)', 'P (Bar)', 'MSD_I(Å²)', 'MSD_Ag(Å²)']
+    data.columns = ['t (ps)', 'T (K)', 'E (eV)', 'K (eV)', 'P (Bar)', 'MSD_I', 'MSD_Ag']
     return data
 
 def create_filepaths(timesteps):
@@ -80,7 +80,7 @@ def compute_total_energy(timesteps, filepaths):
     total_energies = {}
     for t in timesteps:
         try:
-            data[t] = load_energy_data(filepaths[t])
+            data[t] = load_data(filepaths[t])
             total_energies[t] = data[t]["K (eV)"] + data[t]["E (eV)"]
         except FileNotFoundError:
             print(f"Warning: File {filepaths[t]} not found.")
@@ -319,3 +319,72 @@ def plot_rdf(list_df_rdf_293, list_df_rdf_10, n_bins, line_colors=['#007acc', '#
     plt.savefig("Figures/rdf_plot.pdf", bbox_inches='tight')
 
     plt.show()
+
+
+# ===============================
+#         MSD PLOTS AND FITS
+# ===============================
+def plot_msd_AgI(list_df_msd, T, t_sim, dt, line_colors=['#007acc', '#ff5733', '#2ecc71', '#9b59b6', "#ffc972", "#5E5E5E"]):
+    x_ticks = np.arange(0, t_sim + dt, dt)
+
+    max_Ag = max([df["MSD_Ag"].max() for df in list_df_msd])
+    max_I = max([df["MSD_I"].max() for df in list_df_msd])
+
+    fig, ax = plt.subplots(1, 2, figsize=(12, 5))
+    for df_msd, T, l_color in zip(list_df_msd, T, line_colors):
+        ax[0].plot(df_msd["t (ps)"]-df_msd["t (ps)"].iloc[0], df_msd["MSD_I"], color=l_color, linewidth=2)
+        ax[1].plot(df_msd["t (ps)"]-df_msd["t (ps)"].iloc[0], df_msd["MSD_Ag"], label=f"{T} K", color=l_color, linewidth=2)
+    ax[0].set_title(r'$\textbf{Iodine}$')
+    ax[0].set_xlabel(r'$\boldsymbol{t}$ $\textbf{[ps]}$')
+    ax[0].set_ylabel(r'$\textbf{MSD}$ [$\textbf{\AA}^2$]')
+    ax[0].grid()
+    ax[0].set_xlim(0, t_sim)
+    ax[0].set_ylim(0, max_I * 1.03)
+    ax[0].set_xticks(x_ticks)
+
+    ax[1].grid()
+    ax[1].yaxis.tick_right()
+    ax[1].yaxis.set_label_position("right")
+    ax[1].set_xlabel(r'$\boldsymbol{t}$ $\textbf{[ps]}$')
+    ax[1].set_title(r'$\textbf{Silver}$')
+    ax[1].set_xticks(x_ticks)
+    ax[1].set_xlim(0, t_sim)
+    ax[1].set_ylim(0, max_Ag * 1.03)
+
+    handles, labels = ax[1].get_legend_handles_labels()
+    ax[1].legend(handles[::-1], labels[::-1], loc='center left', bbox_to_anchor=(1.1, 0.5), frameon=True)
+
+    plt.tight_layout()
+    plt.show()
+
+
+def fit_msd(list_df_msd, T, model, t_min=0, confidence_levels=[1.96], verbose=True):
+    slopes = {t: None for t in T}
+    uncertainties = {t: None for t in T}    
+    for df_msd, temp in zip(list_df_msd, T):
+        mask = (df_msd["t (ps)"] - df_msd["t (ps)"].iloc[0]) >= t_min
+        t = df_msd["t (ps)"][mask] - df_msd["t (ps)"].iloc[0] 
+        msd_Ag = df_msd["MSD_Ag"][mask]
+        params = model.make_params(a=1, b=0.0)
+        result = model.fit(msd_Ag, params, x=t)
+        a = result.best_values['a']
+        a_err = result.params['a'].stderr
+        slopes[temp] = a
+        uncertainties[temp] = a_err
+        if verbose:
+            print(f"==== Results for T={temp} K ====")
+            print(f"slope: {a:.4f} ± {a_err:.4f} (units: ps^(-1)*A^2)")                  
+            sigma_levels = confidence_levels
+            ci = conf_interval(result, result, sigmas=sigma_levels)
+            print("\n Confidence Report:")
+            report_ci(ci)
+            print("\n")
+    df_results = pd.DataFrame({
+        'Temperature (K)': T,
+        'Slope (ps^(-1)*A^2)': [slopes[t] for t in T],
+        'Uncertainty (ps^(-1)*A^2)': [uncertainties[t] for t in T]
+    })
+    return df_results
+
+def linear_function(x, a, b):
+    return a * x + b
