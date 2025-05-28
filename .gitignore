@@ -38,3 +38,13 @@ lab2/Problem7/simulations_k=6/CaO.scf.a=9.025.ecut=70.k=6.in
 /lab2/Problem9/tetragonal_strain
 /lab2/Problem9/tetragonal_strain_c44
 /lab3/exercise_2/__pycache__
+/lab4/examples/.ipynb_checkpoints
+*.in
+*.lammpstrj
+lab4/particle correlation in alpha AgI.pdf
+*.lammps
+*.json
+lab4/P1/timestep_convergence/5159
+lab4/P1/timestep_convergence/4913
+lab4/P1/timestep_convergence/5036
+lab4/P1/timestep_convergence/5282
