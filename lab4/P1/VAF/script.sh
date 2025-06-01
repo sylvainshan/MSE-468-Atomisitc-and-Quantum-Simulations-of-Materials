@@ -99,6 +99,15 @@ timestep ${time_step}
 # Set initial temperature and velocity
 velocity all create ${temperature} 87287 loop geom
 
+# Add these lines to check initial velocity distribution
+compute vels all property/atom vx vy vz
+compute temp_initial all temp
+thermo_style custom step temp c_temp_initial
+thermo 1
+run 0
+write_dump all custom initial_velocities_${base_name}.dump id type vx vy vz
+
+
 # Following would be returned in the output file
 thermo ${stride}
 thermo_style custom cella cellb cellc

@@ -15,7 +15,7 @@
 ### This creates a sequence of values between 1000 and 3000, every 100
 
 list_time_steps="0.002"
-list_temperatures="2000"
+list_temperatures="800"
 list_supercell_size="6"
 
 #################### !IMPORTANT! ####################
@@ -99,12 +99,22 @@ timestep ${time_step}
 # Set initial temperature and velocity
 velocity all create ${temperature} 87287 loop geom
 
+# Add these lines to check initial velocity distribution
+compute vels all property/atom vx vy vz
+compute temp_initial all temp
+thermo_style custom step temp c_temp_initial
+thermo 1
+run 0
+write_dump all custom initial_velocities_${base_name}.dump id type vx vy vz
+
+
 # Following would be returned in the output file
 thermo ${stride}
 thermo_style custom cella cellb cellc
 # Run equilibration for the first 5000 timesteps in canonical ensemble
 fix 1 all nvt temp ${temperature} ${temperature} $(echo "$time_step * 100.0" | bc)
 run ${equilibration_steps}
+write_dump all custom equilibrated_velocities_${base_name}.dump id type vx vy vz
 
 # Calculate mean square displacement
 group I type 1
@@ -125,8 +135,8 @@ dump_modify dp2 format line "%d %d %g %g %g"
 
 # Run production simulation
 unfix 1
-# fix 2 all nve
-fix 2 all nvt temp ${temperature} ${temperature} $(echo "$time_step * 100.0" | bc)
+fix 2 all nve
+# fix 2 all nvt temp ${temperature} ${temperature} $(echo "$time_step * 100.0" | bc)
 run ${sim_steps}
 EOF
             mpirun -np 6 $exec -in md_${base_name}.in > md_${base_name}.out
