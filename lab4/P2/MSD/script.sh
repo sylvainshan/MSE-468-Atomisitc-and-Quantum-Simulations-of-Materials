@@ -15,7 +15,7 @@
 ### This creates a sequence of values between 1000 and 3000, every 100
 
 list_time_steps="0.002"
-list_temperatures="450 550 650"
+list_temperatures="293 400 450 500 550 600 650 700 750 800"
 list_supercell_size="6"
 
 #################### !IMPORTANT! ####################
@@ -35,7 +35,7 @@ parser="python3 /home/max/Desktop/SHARED/LAB4/scripts/parser.py"
 sim_time="20"
 equilibration_time="5"
 lattice_parameter="5.37"
-stride_time="0.1"
+stride_time="0.3"
 
 # Start loops
 for supercell in $list_supercell_size; do

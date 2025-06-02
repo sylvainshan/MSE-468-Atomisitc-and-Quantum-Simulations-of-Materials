@@ -14,8 +14,8 @@
 ####### list_temperatures=`seq 1000 100 3000` #######
 ### This creates a sequence of values between 1000 and 3000, every 100
 
-list_time_steps="0.001"
-list_temperatures="293 800"
+list_time_steps="0.002"
+list_temperatures="100"
 list_supercell_size="6"
 
 #################### !IMPORTANT! ####################

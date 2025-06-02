@@ -11,6 +11,8 @@ from scipy.constants import k, atomic_mass
 from matplotlib.lines import Line2D
 from matplotlib.patches import Patch
 import seaborn as sns
+from scipy.constants import Boltzmann, atomic_mass, elementary_charge, gas_constant
+import json
 
 # ============================
 #     PLOTTING SETTINGS
@@ -464,7 +466,8 @@ def plot_VAF(filepaths, T,
     
     list_df_vaf = [read_VAF(filepath) for filepath in filepaths]
     
-    fig, ax = plt.subplots(figsize=(6, 5))
+    fig, ax = plt.subplots(figsize=(7, 5.5))
+
     # Plot on main axes
     for df_vaf, temp, m, m_color, l_color in zip(list_df_vaf, T, markers, marker_colors, line_colors):
         ax.plot(df_vaf['t'], df_vaf['VAF(t)']/df_vaf['VAF(t)'].iloc[0], 
@@ -472,21 +475,21 @@ def plot_VAF(filepaths, T,
             markeredgecolor=m_color, markerfacecolor='none', 
             markeredgewidth=2, color=l_color, zorder=3)
 
-    ax.set_xlabel(r'$\boldsymbol{t}$ $\textbf{[ps]}$')
-    ax.set_ylabel(r'$\textbf{VAF}\boldsymbol{(t)}$')
+    ax.set_xlabel(r'$\boldsymbol{t}$ $\textbf{[ps]}$', fontsize=30)
+    ax.set_ylabel(r'$\textbf{NVAF}$', fontsize=30)
     ax.set_xlim(0, 1.5)
     ax.grid()
     ax.legend(ncol=2)
 
     # Create inset axes
-    axins = inset_axes(ax, width="60%", height="40%", loc='center right', borderpad=0.5)
+    axins = inset_axes(ax, width="60%", height="35%", loc='center right', borderpad=0.5)
     axins.spines['top'].set_linewidth(0)
     axins.spines['right'].set_linewidth(0)
     axins.spines['bottom'].set_linewidth(0.5)
     axins.spines['left'].set_linewidth(0.5)
     axins.tick_params(axis='both', labelsize=15, width=0.5, length=4)
 
-    y_min, y_max = -0.05, 0.05
+    y_min, y_max = -0.09, 0.05
 
     for df_vaf, temp, m, m_color, l_color in zip(list_df_vaf, T, markers, marker_colors, line_colors):
         axins.plot(df_vaf['t'], df_vaf['VAF(t)']/df_vaf['VAF(t)'].iloc[0],
@@ -498,7 +501,7 @@ def plot_VAF(filepaths, T,
     axins.grid(True, alpha=0.2)
 
     # Optional: Mark the inset area on the main plot
-    mark_inset(ax, axins, loc1=2, loc2=4, fc="none", ec="0.5")
+    mark_inset(ax, axins, loc1=2, loc2=4, fc="none", ec="0.3")
 
     plt.tight_layout()
 
@@ -508,6 +511,61 @@ def plot_VAF(filepaths, T,
     plt.show()
 
     return list_df_vaf
+
+
+def produce_csv_for_vaf(json_file):
+    # Lecture du fichier JSON
+    with open(json_file, 'r') as f:
+        data = json.load(f)
+
+    # Extraction des données
+    velocities_Ag = data['velocities_Ag']
+    velocities_I = data['velocities_I']
+    times = data['times']
+
+    # For Ag
+    all_ag_vels = []
+    for time_idx, time_val in enumerate(times):
+        for atom_idx in range(len(velocities_Ag[0])):
+            all_ag_vels.append({
+                'time': time_val,
+                'time_step': time_idx,
+                'atom_idx': atom_idx,
+                'vx [m/s]': velocities_Ag[time_idx][atom_idx][0] * 100, # Convert A/ps to m/s
+                'vy [m/s]': velocities_Ag[time_idx][atom_idx][1] * 100,
+                'vz [m/s]': velocities_Ag[time_idx][atom_idx][2] * 100,
+                'v_magnitude [m/s]': np.sqrt(sum([(v*100)**2 for v in velocities_Ag[time_idx][atom_idx]]))
+            })
+
+    # For I
+    all_i_vels = []
+    for time_idx, time_val in enumerate(times):
+        for atom_idx in range(len(velocities_I[0])):
+            all_i_vels.append({
+                'time': time_val,
+                'time_step': time_idx,
+                'atom_idx': atom_idx,
+                'vx [m/s]': velocities_I[time_idx][atom_idx][0] * 100,
+                'vy [m/s]': velocities_I[time_idx][atom_idx][1] * 100,
+                'vz [m/s]': velocities_I[time_idx][atom_idx][2] * 100,
+                'v_magnitude [m/s]': np.sqrt(sum([(v*100)**2 for v in velocities_I[time_idx][atom_idx]]))
+            })
+
+    df_Ag = pd.DataFrame(all_ag_vels)
+    df_I = pd.DataFrame(all_i_vels)
+
+    m_Ag = 107.8682 * atomic_mass # in kg
+    m_I = 126.90447 * atomic_mass 
+
+    df_Ag['kinetic_energy [J]'] = 0.5 * m_Ag * (df_Ag['vx [m/s]']**2 + df_Ag['vy [m/s]']**2 + df_Ag['vz [m/s]']**2) # in kg m^2/s^2 = J
+    df_I['kinetic_energy [J]'] = 0.5 * m_I * (df_I['vx [m/s]']**2 + df_I['vy [m/s]']**2 + df_I['vz [m/s]']**2)
+
+
+    # Save the DataFrames to CSV files
+    df_Ag.to_csv('P1/VAF/velocities_Ag_6_800_0.001.csv', index=False)
+    df_I.to_csv('P1/VAF/velocities_I_6_800_0.001.csv', index=False)
+
+    return df_Ag, df_I
 
 
 # ============================
