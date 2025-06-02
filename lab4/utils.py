@@ -530,6 +530,8 @@ def plot_rdf(list_df_rdf_293, list_df_rdf_10, n_bins, line_colors=['#007acc', '#
         max_rdf = df_rdf['RDF_I'].max()
         max_r = df_rdf['r'].max()
         ax.set_xlim(0, max_r)
+        ax.set_yticks([0,1,2,3,4])
+        ax.set_xticks([0,5,10,15])
         ax.set_ylim(0, 1.05 * max_rdf)
     else:
         for df_rdf, n in zip(list_df_rdf_293, n_bins):
@@ -554,6 +556,7 @@ def plot_rdf(list_df_rdf_293, list_df_rdf_10, n_bins, line_colors=['#007acc', '#
         max_r = df_rdf['r'].max()
         ax.set_xlim(0, max_r)
         ax.set_ylim(0, 1.05 * max_rdf)
+        ax.set_xticks([0,5,10,15])
     else:
         for df_rdf, n in zip(list_df_rdf_10, n_bins):
             ax.plot(df_rdf['r'], df_rdf['RDF_I'], label=f'I {n} bins', linewidth=3)
@@ -581,7 +584,9 @@ def plot_rdf(list_df_rdf_293, list_df_rdf_10, n_bins, line_colors=['#007acc', '#
 # ===============================
 #         MSD PLOTS AND FITS
 # ===============================
-def plot_msd_AgI(list_df_msd, T, t_sim, dt, line_colors=['#007acc', '#ff5733', '#2ecc71', '#9b59b6', "#ffc972", "#5E5E5E"]):
+def plot_msd_AgI(list_df_msd, T, t_sim, dt, 
+                 line_colors=['#007acc', '#ff5733', '#2ecc71', '#9b59b6', "#ffc972", "#5E5E5E", 
+                              "#8b1616", "#df3113", "#0012b6", "#b90000"]):
     x_ticks = np.arange(0, t_sim + dt, dt)
 
     max_Ag = max([df["MSD_Ag"].max() for df in list_df_msd])
@@ -626,17 +631,19 @@ def plot_msd_AgI(list_df_msd, T, t_sim, dt, line_colors=['#007acc', '#ff5733', '
 
 def fit_msd(list_df_msd, T, model, t_min=0, confidence_levels=[1.96], verbose=True):
     slopes = {t: None for t in T}
-    uncertainties = {t: None for t in T}    
+    uncertainties = {t: None for t in T}   
+    results = {t: None for t in T} 
     for df_msd, temp in zip(list_df_msd, T):
         mask = (df_msd["t (ps)"] - df_msd["t (ps)"].iloc[0]) >= t_min
         t = df_msd["t (ps)"][mask] - df_msd["t (ps)"].iloc[0] 
         msd_Ag = df_msd["MSD_Ag"][mask]
-        params = model.make_params(a=1, b=0.0)
+        params = model.make_params(a=2, b=1)
         result = model.fit(msd_Ag, params, x=t)
         a = result.best_values['a']
         a_err = result.params['a'].stderr
         slopes[temp] = a
         uncertainties[temp] = a_err
+        results[temp] = result
         if verbose:
             print(f"==== Results for T={temp} K ====")
             print(f"slope: {a:.4f} ± {a_err:.4f} (units: ps^(-1)*A^2)")                  
@@ -650,7 +657,7 @@ def fit_msd(list_df_msd, T, model, t_min=0, confidence_levels=[1.96], verbose=Tr
         'Slope (ps^(-1)*A^2)': [slopes[t] for t in T],
         'Uncertainty (ps^(-1)*A^2)': [uncertainties[t] for t in T]
     })
-    return df_results
+    return df_results, results
 
 def linear_function(x, a, b):
     return a * x + b

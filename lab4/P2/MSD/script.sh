@@ -15,7 +15,7 @@
 ### This creates a sequence of values between 1000 and 3000, every 100
 
 list_time_steps="0.002"
-list_temperatures="10"
+list_temperatures="450 550 650"
 list_supercell_size="6"
 
 #################### !IMPORTANT! ####################
