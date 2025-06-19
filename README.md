@@ -6,25 +6,25 @@ Each lab directory corresponds to a separate project, covering different physica
 
 ## 🧪 Contents
 
-- **Lab 1 – FCC Silver Properties with LAMMPS**  
+- **1. FCC Silver Properties with LAMMPS**  
   - Structural relaxation with Lennard-Jones and EAM potentials  
   - Bulk modulus estimation via energy–volume fitting  
   - Vacancy formation energy (with and without relaxation)  
   - Surface energy calculation 
   - Modeling of the $\rm L1_0$ CuAu binary alloy  
 
-- **Lab 2 – First-Principles Study of Bulk CaO**  
+- **2. First-Principles Study of Bulk CaO**  
   - Convergence tests for energy cutoff and $\mathbf{k}$-point grid  
   - Determination of equilibrium lattice parameter  
   - Calculation of bulk modulus via Birch-Murnaghan fitting  
   - Extraction of elastic constants ($C_{11}$, $C_{12}$, $C_{44}$) from strain–energy relations  
 
-- **Lab 3 – Electronic Properties from First-Principles**  
+- **3. Electronic Properties from First-Principles**  
   - Band structure and density of states of FCC MgO  
   - van der Waals effects on structural and electronic properties of bulk and monolayer $\text{MoS}_2$  
   - Magnetic phase stability of FCC and HCP cobalt, including spin-polarized density of states analysis  
 
-- **Lab 4 – Classical Molecular Dynamics of Silver Iodide**
+- **4. Classical Molecular Dynamics of Silver Iodide**
   - Convergence tests (timestep, supercell size, velocity autocorrelation function decay)  
   - Structural analysis via radial distribution function  
   - Diffusion behavior via mean square displacement 
