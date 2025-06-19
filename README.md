@@ -14,7 +14,6 @@ Each lab directory corresponds to a separate project, covering different physica
   - Modeling of the $\rm L1_0$ CuAu binary alloy  
 
 - **Lab 2 – First-Principles Study of Bulk CaO**  
-  DFT simulations of bulk calcium oxide. This lab includes:
   - Convergence tests for energy cutoff and $\mathbf{k}$-point grid  
   - Determination of equilibrium lattice parameter  
   - Calculation of bulk modulus via Birch-Murnaghan fitting  
