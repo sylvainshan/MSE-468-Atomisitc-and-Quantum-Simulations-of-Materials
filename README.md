@@ -1,6 +1,6 @@
 # Materials Simulations with DFT and Molecular Dynamics
 
-This repository contains a series of simulation projects (`lab1`, `lab2`, `lab3`, `lab4`) focused on materials modeling using **Density Functional Theory (DFT)** and **Molecular Dynamics (MD)**. These simulations are performed with industry-standard tools such as **Quantum ESPRESSO** and **LAMMPS**.
+This repository contains a series of simulation projects (`lab1`, `lab2`, `lab3`, `lab4`) focused on materials modeling using **Density Functional Theory (DFT)** and **Molecular Dynamics (MD)**. These simulations are performed with **Quantum ESPRESSO** and **LAMMPS**.
 
 Each lab directory corresponds to a separate project, covering different physical systems or simulation objectives.
 
